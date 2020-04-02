@@ -67,6 +67,9 @@ jobs:
           pwd
           uname
           uname -m
+          echo $OS_NAME
+          echo $ARCH_NAME
+          cat "ABCDE" > $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME/test.txt
           gcc -v
           rm static/${{ env.ARCH_NAME }}/${{ env.OS_NAME }}/${{ env.DLL_NAME }}
           ./bootstrap
