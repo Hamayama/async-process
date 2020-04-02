@@ -28,6 +28,7 @@ jobs:
     - name: Build
       run: |
         gcc -v
+        rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
         ./bootstrap
     - name: Copy Result
       if: always()
@@ -61,10 +62,13 @@ jobs:
         run: |
           apt update
           apt install -y build-essential
+          apt install -y automake
+          apt install -y libtool
           pwd
           uname
           uname -m
           gcc -v
+          rm static/${{ env.ARCH_NAME }}/${{ env.OS_NAME }}/${{ env.DLL_NAME }}
           ./bootstrap
     - name: Copy Result
       if: always()
@@ -106,6 +110,7 @@ jobs:
     - name: Build
       run: |
         gcc -v
+        rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
         ./bootstrap
     - name: Copy Result
       if: always()
@@ -199,6 +204,7 @@ jobs:
         bash -lc @'
           cd $GITHUB_WORKSPACE
           gcc -v
+          rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
           ./bootstrap
         '@
     - name: Copy Result
