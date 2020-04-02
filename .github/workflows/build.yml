@@ -41,6 +41,43 @@ jobs:
         name: ${{ env.RESULT_NAME }}
         path: ${{ env.RESULT_PATH }}
 
+  build-linux-aarch64:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OS_NAME: Linux
+      ARCH_NAME: aarch64
+      DLL_NAME: libasyncprocess.so
+      RESULT_NAME: result-linux-aarch64:
+      RESULT_PATH: result-linux-aarch64:
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run commands on arm64
+      id: runcmd
+      uses: uraimo/run-on-arch-action@v1.0.5
+      with:
+        architecture: aarch64
+        distribution: ubuntu18.04
+        run: |
+          apt update
+          apt install -y build-essential
+          pwd
+          uname
+          uname -m
+          gcc -v
+          ./bootstrap
+    - name: Copy Result
+      if: always()
+      run: |
+        mkdir -p $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+    - name: Upload Result
+      if: always()
+      uses: actions/upload-artifact@v1
+      with:
+        name: ${{ env.RESULT_NAME }}
+        path: ${{ env.RESULT_PATH }}
+
   build-osx:
     runs-on: macos-latest
     timeout-minutes: 90
@@ -105,7 +142,7 @@ jobs:
       MSYS2_TARBALL_URL3: https://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-base-x86_64-20190524.tar.xz
       DLL_NAME: libasyncprocess.dll
       RESULT_NAME: result-windows-${{ matrix.arch }}
-      RESULT_PATH: result-windows
+      RESULT_PATH: result-windows-${{ matrix.arch }}
     steps:
     - run: git config --global core.autocrlf false
     - uses: actions/checkout@v2
