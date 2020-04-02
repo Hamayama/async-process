@@ -55,7 +55,7 @@ jobs:
       RESULT_PATH_SUB: result-async/static
     steps:
     - uses: actions/checkout@v2
-    - name: Run commands on arm64
+    - name: Build on aarch64 (arm64)
       id: runcmd
       uses: uraimo/run-on-arch-action@v1.0.5
       with:
