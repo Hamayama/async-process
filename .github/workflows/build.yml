@@ -104,8 +104,8 @@ jobs:
       MSYS2_TARBALL_URL2: http://repo.msys2.org/distrib/x86_64/msys2-base-x86_64-20190524.tar.xz
       MSYS2_TARBALL_URL3: https://sourceforge.net/projects/msys2/files/Base/x86_64/msys2-base-x86_64-20190524.tar.xz
       DLL_NAME: libasyncprocess.dll
-      RESULT_NAME: testlog-windows-${{ matrix.arch }}
-      RESULT_PATH: testlog-windows
+      RESULT_NAME: result-windows-${{ matrix.arch }}
+      RESULT_PATH: result-windows
     steps:
     - run: git config --global core.autocrlf false
     - uses: actions/checkout@v2
