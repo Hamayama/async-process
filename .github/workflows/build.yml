@@ -48,8 +48,8 @@ jobs:
       OS_NAME: Linux
       ARCH_NAME: aarch64
       DLL_NAME: libasyncprocess.so
-      RESULT_NAME: result-linux-aarch64:
-      RESULT_PATH: result-linux-aarch64:
+      RESULT_NAME: result-linux-aarch64
+      RESULT_PATH: result-linux-aarch64
     steps:
     - uses: actions/checkout@v2
     - name: Run commands on arm64
