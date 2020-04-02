@@ -61,6 +61,7 @@ jobs:
         echo "::set-env name=ARCH_NAME::$ARCH_NAME"
     - name: Install tools
       run: |
+        brew install libtool
         brew install automake
     - name: Build
       run: |
@@ -150,8 +151,8 @@ jobs:
           uname -m
           OS_NAME=windows
           ARCH_NAME=${{ matrix.arch2 }}
-          echo "::set-env name=OS_NAME::$OS_NAME"
-          echo "::set-env name=ARCH_NAME::$ARCH_NAME"
+          echo \"::set-env name=OS_NAME::$OS_NAME\"
+          echo \"::set-env name=ARCH_NAME::$ARCH_NAME\"
         '@
     - name: Build
       run: |
