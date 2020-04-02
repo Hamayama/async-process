@@ -14,7 +14,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-linux
       RESULT_PATH: result-linux
-      RESULT_PATH_SUB: result-async
+      RESULT_PATH_SUB: result-async/static
     steps:
     - uses: actions/checkout@v2
     - name: Set environment variables
@@ -52,7 +52,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-linux-aarch64
       RESULT_PATH: result-linux-aarch64
-      RESULT_PATH_SUB: result-async
+      RESULT_PATH_SUB: result-async/static
     steps:
     - uses: actions/checkout@v2
     - name: Run commands on arm64
@@ -91,7 +91,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-osx
       RESULT_PATH: result-osx
-      RESULT_PATH_SUB: result-async
+      RESULT_PATH_SUB: result-async/static
     steps:
     - uses: actions/checkout@v2
     - name: Set environment variables
@@ -151,7 +151,7 @@ jobs:
       DLL_NAME: libasyncprocess.dll
       RESULT_NAME: result-windows-${{ matrix.arch }}
       RESULT_PATH: result-windows-${{ matrix.arch }}
-      RESULT_PATH_SUB: result-async
+      RESULT_PATH_SUB: result-async/static
     steps:
     - run: git config --global core.autocrlf false
     - uses: actions/checkout@v2
