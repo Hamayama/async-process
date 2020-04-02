@@ -61,8 +61,11 @@ jobs:
         echo "::set-env name=ARCH_NAME::$ARCH_NAME"
     - name: Install tools
       run: |
-        brew install libtool
         brew install automake
+        #brew install libtool
+        which glibtoolize
+        ln -s /usr/local/bin/glibtoolize /usr/local/bin/libtoolize
+        which libtoolize
     - name: Build
       run: |
         gcc -v
