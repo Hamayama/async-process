@@ -60,16 +60,14 @@ jobs:
         architecture: aarch64
         distribution: ubuntu18.04
         run: |
-          apt update
-          apt install -y build-essential
-          apt install -y automake
-          apt install -y libtool
+          apt-get update
+          apt-get install build-essential
+          apt-get install automake
+          apt-get install libtool
           pwd
           uname
           uname -m
-          echo $OS_NAME
-          echo $ARCH_NAME
-          cat "ABCDE" > $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME/test.txt
+          cat "abcde" > ${{ env.RESULT_PATH }}/${{ env.RESULT_NAME }}/${{ env.ARCH_NAME }}/${{ env.OS_NAME }}/test.txt
           gcc -v
           rm static/${{ env.ARCH_NAME }}/${{ env.OS_NAME }}/${{ env.DLL_NAME }}
           ./bootstrap
