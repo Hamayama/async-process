@@ -14,6 +14,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-linux
       RESULT_PATH: result-linux
+      RESULT_PATH_SUB: result-async
     steps:
     - uses: actions/checkout@v2
     - name: Set environment variables
@@ -33,8 +34,8 @@ jobs:
     - name: Copy Result
       if: always()
       run: |
-        mkdir -p $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
-        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+        mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
+        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
     - name: Upload Result
       if: always()
       uses: actions/upload-artifact@v1
@@ -51,6 +52,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-linux-aarch64
       RESULT_PATH: result-linux-aarch64
+      RESULT_PATH_SUB: result-async
     steps:
     - uses: actions/checkout@v2
     - name: Run commands on arm64
@@ -73,8 +75,8 @@ jobs:
     - name: Copy Result
       if: always()
       run: |
-        mkdir -p $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
-        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+        mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
+        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
     - name: Upload Result
       if: always()
       uses: actions/upload-artifact@v1
@@ -89,6 +91,7 @@ jobs:
       DLL_NAME: libasyncprocess.so
       RESULT_NAME: result-osx
       RESULT_PATH: result-osx
+      RESULT_PATH_SUB: result-async
     steps:
     - uses: actions/checkout@v2
     - name: Set environment variables
@@ -115,8 +118,8 @@ jobs:
     - name: Copy Result
       if: always()
       run: |
-        mkdir -p $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
-        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+        mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
+        cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
     - name: Upload Result
       if: always()
       uses: actions/upload-artifact@v1
@@ -148,6 +151,7 @@ jobs:
       DLL_NAME: libasyncprocess.dll
       RESULT_NAME: result-windows-${{ matrix.arch }}
       RESULT_PATH: result-windows-${{ matrix.arch }}
+      RESULT_PATH_SUB: result-async
     steps:
     - run: git config --global core.autocrlf false
     - uses: actions/checkout@v2
@@ -212,8 +216,8 @@ jobs:
       run: |
         bash -lc @'
           cd $GITHUB_WORKSPACE
-          mkdir -p $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
-          cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_NAME/$ARCH_NAME/$OS_NAME
+          mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
+          cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
         '@
     - name: Upload Result
       if: always()
