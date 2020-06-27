@@ -5,7 +5,6 @@ on:
   pull_request:
   #schedule:
   #  - cron: '0 */2 * * *'
-  #
 
 jobs:
   build-linux:
@@ -34,12 +33,12 @@ jobs:
         gcc -v
         rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
         ./bootstrap
-    - name: Copy Result
+    - name: Copy result
       if: always()
       run: |
         mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
         cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
-    - name: Upload Result
+    - name: Upload result
       if: always()
       uses: actions/upload-artifact@v1
       with:
@@ -75,12 +74,12 @@ jobs:
           gcc -v
           rm static/${{ env.ARCH_NAME }}/${{ env.OS_NAME }}/${{ env.DLL_NAME }}
           ./bootstrap
-    - name: Copy Result
+    - name: Copy result
       if: always()
       run: |
         mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
         cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
-    - name: Upload Result
+    - name: Upload result
       if: always()
       uses: actions/upload-artifact@v1
       with:
@@ -120,12 +119,12 @@ jobs:
         gcc -v
         rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
         ./bootstrap
-    - name: Copy Result
+    - name: Copy result
       if: always()
       run: |
         mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
         cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
-    - name: Upload Result
+    - name: Upload result
       if: always()
       uses: actions/upload-artifact@v1
       with:
@@ -159,6 +158,13 @@ jobs:
     steps:
     - run: git config --global core.autocrlf false
     - uses: actions/checkout@v2
+    - uses: msys2/setup-msys2@v1
+      with:
+        msystem: MINGW${{ matrix.bit }}
+        path-type: inherit
+        release: false
+        update: true
+        cache: true
     - name: Add MSYS2 path
       run: |
         echo "::set-env name=PATH::$env:MSYS2_PATH_LIST;$env:PATH"
@@ -172,12 +178,6 @@ jobs:
           uname -m
           echo $PATH
         '@
-    - name: Update MSYS2
-      run: |
-        bash -lc @'
-          pacman --version
-          pacman -Syyuu --noconfirm
-        '@
     - name: Build
       run: |
         bash -lc @'
@@ -186,7 +186,7 @@ jobs:
           rm static/$ARCH_NAME/$OS_NAME/$DLL_NAME
           ./bootstrap
         '@
-    - name: Copy Result
+    - name: Copy result
       if: always()
       run: |
         bash -lc @'
@@ -194,7 +194,7 @@ jobs:
           mkdir -p $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
           cp static/$ARCH_NAME/$OS_NAME/$DLL_NAME $RESULT_PATH/$RESULT_PATH_SUB/$ARCH_NAME/$OS_NAME
         '@
-    - name: Upload Result
+    - name: Upload result
       if: always()
       uses: actions/upload-artifact@v1
       with:
